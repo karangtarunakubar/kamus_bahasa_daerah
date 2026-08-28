@@ -114,7 +114,7 @@ Features
 ## Lisensi
 
 Dokumen ini memiliki lisensi tersurat. Lihat `LICENSE`.
-[LICENSE](https://github.com/karangtarunakubar/kamus_tunjung/LICENSE)
+[LICENSE](https://github.com/karangtarunakubar/kamus_bahasa_daerah/LICENSE.txt)
 
 ## Kontak
 - 085750733608
