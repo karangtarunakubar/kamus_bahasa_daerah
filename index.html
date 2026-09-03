@@ -1,0 +1,118 @@
+<!-- src/app/auth/auth.page.html -->
+<ion-header class="ion-no-border">
+  <ion-toolbar color="primary">
+    <ion-title>Welcome</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content class="ion-padding">
+  <div class="auth-container">
+    <ion-segment [value]="selectedSegment" (ionChange)="segmentChanged($event)" mode="md">
+      <ion-segment-button value="login">
+        <ion-label>Login</ion-label>
+      </ion-segment-button>
+      <ion-segment-button value="register">
+        <ion-label>Register</ion-label>
+      </ion-segment-button>
+    </ion-segment>
+
+    <!-- Login Form -->
+    <form *ngIf="selectedSegment === 'login'" [formGroup]="loginForm" (ngSubmit)="onLogin()" class="form-container">
+      <ion-item lines="full">
+        <ion-icon name="mail-outline" slot="start"></ion-icon>
+        <ion-input 
+          formControlName="email" 
+          type="email" 
+          label="Email" 
+          labelPlacement="floating" 
+          placeholder="name@example.com">
+        </ion-input>
+      </ion-item>
+      <ion-note color="danger" *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.errors?.['required']">
+        Email is required.
+      </ion-note>
+      <ion-note color="danger" *ngIf="loginForm.get('email')?.touched && loginForm.get('email')?.errors?.['email']">
+        Enter a valid email address.
+      </ion-note>
+
+      <ion-item lines="full">
+        <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+        <ion-input 
+          formControlName="password" 
+          [type]="showPassword ? 'text' : 'password'" 
+          label="Password" 
+          labelPlacement="floating" 
+          placeholder="••••••••">
+        </ion-input>
+        <ion-icon 
+          [name]="showPassword ? 'eye-off-outline' : 'eye-outline'" 
+          slot="end" 
+          class="password-toggle"
+          (click)="togglePasswordVisibility()">
+        </ion-icon>
+      </ion-item>
+      <ion-note color="danger" *ngIf="loginForm.get('password')?.touched && loginForm.get('password')?.errors?.['required']">
+        Password is required.
+      </ion-note>
+
+      <ion-button expand="block" type="submit" class="ion-margin-top">
+        Log In
+      </ion-button>
+    </form>
+
+    <!-- Register Form -->
+    <form *ngIf="selectedSegment === 'register'" [formGroup]="registerForm" (ngSubmit)="onRegister()" class="form-container">
+      <ion-item lines="full">
+        <ion-icon name="person-outline" slot="start"></ion-icon>
+        <ion-input 
+          formControlName="fullName" 
+          type="text" 
+          label="Full Name" 
+          labelPlacement="floating" 
+          placeholder="Jane Doe">
+        </ion-input>
+      </ion-item>
+      <ion-note color="danger" *ngIf="registerForm.get('fullName')?.touched && registerForm.get('fullName')?.errors?.['required']">
+        Full name is required.
+      </ion-note>
+
+      <ion-item lines="full">
+        <ion-icon name="mail-outline" slot="start"></ion-icon>
+        <ion-input 
+          formControlName="email" 
+          type="email" 
+          label="Email" 
+          labelPlacement="floating" 
+          placeholder="name@example.com">
+        </ion-input>
+      </ion-item>
+      <ion-note color="danger" *ngIf="registerForm.get('email')?.touched && registerForm.get('email')?.errors?.['email']">
+        Enter a valid email address.
+      </ion-note>
+
+      <ion-item lines="full">
+        <ion-icon name="lock-closed-outline" slot="start"></ion-icon>
+        <ion-input 
+          formControlName="password" 
+          [type]="showPassword ? 'text' : 'password'" 
+          label="Password" 
+          labelPlacement="floating" 
+          placeholder="••••••••">
+        </ion-input>
+        <ion-icon 
+          [name]="showPassword ? 'eye-off-outline' : 'eye-outline'" 
+          slot="end" 
+          class="password-toggle"
+          (click)="togglePasswordVisibility()">
+        </ion-icon>
+      </ion-item>
+      <ion-note color="danger" *ngIf="registerForm.get('password')?.touched && registerForm.get('password')?.errors?.['minLength']">
+        Password must be at least 6 characters.
+      </ion-note>
+
+      <ion-button expand="block" type="submit" color="success" class="ion-margin-top">
+        Create Account
+      </ion-button>
+    </form>
+  </div>
+</ion-content>
